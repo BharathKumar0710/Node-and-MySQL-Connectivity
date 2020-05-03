@@ -1,0 +1,24 @@
+{
+  "name": "node-and-mysql-connectivity",
+  "version": "1.0.0",
+  "description": "Basics of Node and MySQL connectivity",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BharathKumar0710/Node-and-MySQL-Connectivity.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BharathKumar0710/Node-and-MySQL-Connectivity/issues"
+  },
+  "homepage": "https://github.com/BharathKumar0710/Node-and-MySQL-Connectivity#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}

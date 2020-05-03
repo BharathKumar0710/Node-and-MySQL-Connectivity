@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "message": "Alpha",
+        "lucky number": 12,
+        "animal": "Dog"
+    },
+    {
+        "id": 2,
+        "message": "Bravo",
+        "lucky number": 15,
+        "animal": "Lion"
+    },
+    {
+        "id": 3,
+        "message": "Chailie",
+        "lucky number": 30,
+        "animal": "cat"
+    }
+]
