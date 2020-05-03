@@ -1,10 +1,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+console.log("requiring fortunes data");
 const fortunes = require("./fortunes.json");
 const port = 3000;
 const app = express();
 
 app.use(bodyParser.json());
+app.listen(port, () => console.log(`Listening on port ${port}`));
 
 app.get("/fortunes", (req, res) => {
   console.log("Requesting Fortunes");
@@ -33,7 +35,7 @@ app.post("/fortunes", (req, res) => {
 
   const { message, lucky_number, spirit_animal } = req.body;
   const fortune_ids = fortunes.map((f) => f.id);
-  
+
   // const fortune = {
   //   id: (fortune_ids.length > 0 ? Math.max(...fortune_ids) : 0) + 1,
   //   message,
@@ -52,8 +54,38 @@ app.post("/fortunes", (req, res) => {
     console.log(err)
   );
   res.json(new_fortunes);
+
+  const writeFortunes = (json = () => {
+    fs.writeFile("./data/fortunes.json", JSON.stringify(fortunes), (err) =>
+      console.log(err)
+    );
+  });
+
+  writeFortunes(new_fortunes);
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.put("/fortunes/id:", (req, res) => {
+  const { id } = req.params;
+  const { message, lucky_number, spirit_animal } = req.body;
+
+  const old_fortune = fortune.find((f) => f.id == id);
+
+  if (message) old_fortune.message = message;
+  if (lucky_number) old_fortune.lucky_number = lucky_number;
+  if (spirit_animal) old_fortune.spirit_animal = spirit_animal;
+
+  ["message", "lucky_number", "spirit_animal"].forEach((key) => {
+    if (req.body[key]) old_fortune[key] = req.body[key];
+  });
+  writeFortunes(fortunes);
+  res.json(fortunes);
+});
+
+// For deleting
+app.delete("/fortunes/:id", (req, res) => {
+  const { id } = req.params;
+  const new_fortunes = fortunes.filter((f) => f.id != id);
+  writeFortunes(new_fortunes);
+});
 
 module.exports = app;
